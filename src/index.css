@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-black text-white;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #00d4ff 0%, #7b2cff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.35);
+}
+
+.card-dark {
+  @apply bg-[#111111] border border-gray-800 rounded-2xl;
+}
+
+.glow-button {
+  @apply inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold transition-all duration-300;
+  background: linear-gradient(90deg, #00d4ff 0%, #7b2cff 100%);
+  color: #000000;
+  box-shadow: 0 0 24px rgba(0, 212, 255, 0.28);
+}
+
+.glow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+}
+
+.glow-button:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(0, 212, 255, 0.25),
+    0 0 24px rgba(0, 212, 255, 0.28);
+}
+
+.glow-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
