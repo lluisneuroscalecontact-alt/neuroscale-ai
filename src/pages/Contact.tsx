@@ -131,7 +131,7 @@ const Contact = () => {
               className="lg:col-span-3 bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8"
             >
               <h2 className="text-white font-semibold text-lg mb-6">
-                Solicitar demo gratuita
+                Solicitar demo personalizada
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-4">

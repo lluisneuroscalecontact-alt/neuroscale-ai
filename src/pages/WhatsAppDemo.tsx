@@ -358,7 +358,7 @@ const WhatsAppDemo = () => {
               className="inline-flex justify-center items-center w-full px-4 py-2.5 rounded-lg font-semibold text-xs text-black transition-all duration-300 hover:opacity-90"
               style={{ background: 'linear-gradient(90deg, #00d4ff, #7b2cff)' }}
             >
-              Solicitar demo aplicada a mi clínica
+              Solicitar demo personalizada
             </Link>
           </div>
         </div>

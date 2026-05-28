@@ -93,7 +93,7 @@ const Footer = () => {
                 to="/contact"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
-                Solicitar demo
+                Demo personalizada
               </Link>
             </nav>
           </div>
@@ -116,7 +116,7 @@ const Footer = () => {
                 background: 'linear-gradient(90deg, #00d4ff, #7b2cff)',
               }}
             >
-              Solicitar demo
+              Demo personalizada
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </div>

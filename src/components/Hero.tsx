@@ -80,7 +80,7 @@ const Hero = () => {
             to="/contact"
             className="w-full sm:w-auto px-8 py-4 rounded-lg font-semibold border border-white/20 text-white hover:border-neuro-blue/60 hover:bg-white/5 transition-all duration-300 text-base inline-flex items-center justify-center"
           >
-            Solicitar demo
+            Demo personalizada
           </Link>
         </motion.div>
 

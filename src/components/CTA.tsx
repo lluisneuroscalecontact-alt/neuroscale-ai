@@ -61,7 +61,7 @@ const CTA = () => {
                 to="/contact"
                 className="glow-button w-full sm:w-auto text-base"
               >
-                Solicitar demo
+                Demo personalizada
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
 

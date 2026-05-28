@@ -92,7 +92,7 @@ const Navigation = () => {
                 background: 'linear-gradient(90deg, #00d4ff, #7b2cff)',
               }}
             >
-              Solicitar demo
+              Demo personalizada
             </Link>
 
             <button
