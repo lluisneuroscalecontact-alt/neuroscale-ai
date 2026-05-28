@@ -1,37 +1,48 @@
+// src/components/FAQ.tsx
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 const faqs = [
   {
-    question: '¿Trabajáis solo con clínicas estéticas?',
+    question: '¿NeuroScale sustituye a recepción?',
     answer:
-      'Ahora mismo nuestra propuesta está enfocada en clínicas estéticas porque permite construir una oferta más clara, más especializada y con mejor encaje comercial.',
+      'No. NeuroScale se encarga de las respuestas iniciales, la recogida de datos y el seguimiento automático. Tu equipo sigue tomando las decisiones y atendiendo los casos importantes. NeuroScale solo reduce el trabajo repetitivo, atiende al paciente en persona y gestiona los casos que requieren atención humana. El sistema reduce el trabajo repetitivo, no las personas.',
   },
   {
-    question: '¿Necesito invertir mucho en anuncios para empezar?',
+    question: '¿La IA da consejos médicos o diagnósticos?',
     answer:
-      'No necesariamente. La inversión depende de tu zona, tus servicios y tu objetivo. Lo importante es tener una estructura correcta para que el presupuesto se aproveche mejor.',
+      'No. NeuroScale no da consejos médicos, no hace diagnósticos ni opina sobre tratamientos. Su función es atender la consulta inicial, recoger información básica y orientar al paciente hacia el siguiente paso: reservar cita o hablar con el equipo.',
   },
   {
-    question: '¿También hacéis la landing y el formulario?',
+    question: '¿Tengo que cambiar mi WhatsApp?',
     answer:
-      'Sí. La idea es montar un sistema completo: anuncios, landing, captación de datos y seguimiento inicial para que no se pierdan oportunidades.',
+      'En la demo revisamos tu proceso actual y vemos la forma más sencilla de integrarlo. El sistema se conecta a través de la API oficial de WhatsApp Business. Tu clínica mantiene el mismo número y la misma identidad. La configuración la hacemos nosotros durante la instalación.',
   },
   {
-    question: '¿En cuánto tiempo se pueden ver resultados?',
+    question: '¿Se adapta a mis tratamientos y horarios?',
     answer:
-      'Depende del punto de partida de la clínica, del mercado y de la oferta. Normalmente primero buscamos validar el mensaje y la captación, y a partir de ahí optimizar.',
+      'Sí. Antes de activar el sistema, lo configuramos específicamente para tu clínica: los tratamientos que ofreces, el horario de atención, el tono de comunicación y las preguntas clave que necesitas hacer a cada lead.',
   },
   {
-    question: '¿Y si ya tengo Instagram o alguien llevándome redes?',
+    question: '¿Qué pasa si el paciente necesita hablar con una persona?',
     answer:
-      'No hay problema. Esto no sustituye necesariamente tus redes. Lo que hacemos es crear un sistema más enfocado en generar solicitudes de pacientes potenciales.',
+      'El sistema detecta cuándo una consulta requiere atención directa y lo indica claramente. En ese momento, el equipo recibe un aviso para retomar la conversación. NeuroScale no bloquea el acceso al equipo humano, lo reserva para cuando de verdad hace falta.',
   },
   {
-    question: '¿Qué pasa después de dejar mis datos?',
+    question: '¿Cuánto tarda en instalarse?',
     answer:
-      'Revisamos tu caso, vemos si encaja con nuestro enfoque y te contactamos para hablar de la mejor estrategia para tu clínica.',
+      'La configuración inicial suele completarse en menos de una semana. Antes de activar el sistema hacemos una llamada para entender tu clínica, y a partir de ahí preparamos todo para que funcione desde el primer día.',
+  },
+  {
+    question: '¿Puedo empezar con una versión piloto?',
+    answer:
+      'Sí, es exactamente lo que ofrecemos ahora mismo. El piloto incluye el sistema completo configurado para tu clínica, con un precio reducido porque nos interesa trabajar con los primeros casos reales y ajustar el sistema de forma cercana.',
+  },
+  {
+    question: '¿Qué necesito para empezar?',
+    answer:
+      'Un número de WhatsApp Business, acceso a Google Calendar y algo de tiempo para la llamada inicial de configuración. Nosotros nos encargamos del resto. No necesitas conocimientos técnicos ni herramientas adicionales.',
   },
 ];
 
@@ -40,7 +51,9 @@ const FAQ = () => {
 
   return (
     <section id="faq" className="py-24 bg-[#050505] px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-3xl mx-auto">
+
+        {/* Cabecera */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,51 +65,87 @@ const FAQ = () => {
             Preguntas frecuentes
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-poppins text-white mb-4">
-            Resolvemos las dudas más comunes
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-poppins text-white mb-4 leading-tight">
+           Dudas frecuentes antes de {' '}
+            <span className="gradient-text">probar NeuroScale</span>
           </h2>
 
-          <p className="text-lg text-gray-300">
-            Aquí tienes respuestas claras antes de reservar una llamada.
+          <p className="text-lg text-gray-300 max-w-xl mx-auto">
+            Las dudas más habituales que tienen las clínicas antes de pedir una demo o entrar como piloto.
           </p>
         </motion.div>
 
-        <div className="space-y-4">
+        {/* Acordeón */}
+        <div className="space-y-3">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
               <motion.div
                 key={faq.question}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: index * 0.05 }}
-                className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden"
+                transition={{ duration: 0.35, delay: index * 0.045 }}
+                className={`border rounded-2xl overflow-hidden transition-colors duration-300 ${
+                  isOpen
+                    ? 'bg-white/[0.07] border-neuro-blue/30'
+                    : 'bg-white/5 border-white/10 hover:border-white/20'
+                }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full flex items-center justify-between text-left p-6"
+                  className="w-full flex items-center justify-between text-left px-6 py-5 gap-4"
+                  aria-expanded={isOpen}
                 >
-                  <span className="text-white font-semibold pr-4">
+                  <span className={`font-semibold text-sm sm:text-base transition-colors duration-200 ${isOpen ? 'text-white' : 'text-gray-200'}`}>
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-neuro-blue transition-transform duration-300 ${
-                      isOpen ? 'rotate-180' : ''
+                    className={`w-5 h-5 flex-shrink-0 transition-all duration-300 ${
+                      isOpen ? 'rotate-180 text-neuro-blue' : 'text-gray-500'
                     }`}
                   />
                 </button>
 
-                {isOpen && (
-                  <div className="px-6 pb-6 text-gray-300 leading-relaxed">
-                    {faq.answer}
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: 'easeOut' }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             );
           })}
         </div>
+
+               {/* Nota de cierre */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center text-gray-500 text-sm mt-10"
+        >
+          ¿Tienes alguna duda que no esté aquí?{' '}
+          <a
+            href="#cta"
+            className="text-neuro-blue hover:underline transition-all"
+          >
+            Escríbenos directamente.
+          </a>
+        </motion.p>
+
       </div>
     </section>
   );

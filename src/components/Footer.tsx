@@ -1,43 +1,62 @@
+// src/components/Footer.tsx
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MessageCircle, ArrowRight } from 'lucide-react';
+import logoIcon from '../assets/vite.svg';
+
+const EMAIL_HREF =
+  'https://mail.google.com/mail/?view=cm&fs=1&to=lluis.neuroscale.contact@gmail.com&su=Solicitud%20demo%20NeuroScale&body=Hola%20Lluis%2C%20me%20gustar%C3%ADa%20ver%20una%20demo%20de%20NeuroScale%20para%20mi%20cl%C3%ADnica.';
+
+const navLinks = [
+  { label: 'Inicio', href: '/#home' },
+  { label: 'Sistema', href: '/#services' },
+  { label: 'Cómo funciona', href: '/#how-it-works' },
+  { label: 'Resultados', href: '/#results' },
+  { label: 'FAQ', href: '/#faq' },
+];
 
 const Footer = () => {
   return (
-    <footer className="bg-[#030303] border-t border-white/10 px-4 sm:px-6 lg:px-8 py-14">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-10">
-          <div className="md:col-span-2">
-            <Link to="/" className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-neuro-blue rounded-lg flex items-center justify-center">
-                <span className="text-neuro-black font-bold text-sm">NS</span>
+    <footer className="bg-[#030303] border-t border-white/10 px-4 sm:px-6 lg:px-8 pt-14 pb-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Cuerpo principal */}
+        <div className="grid md:grid-cols-3 gap-10 mb-12">
+          {/* Columna 1 */}
+          <div>
+            <Link to="/" className="inline-flex items-center gap-2.5 mb-5">
+              <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+                <img
+                  src={logoIcon}
+                  alt="NeuroScale AI"
+                  className="w-7 h-7 object-contain"
+                />
               </div>
-              <div>
-                <p className="text-white font-bold text-xl leading-none">NeuroScale AI</p>
-                <p className="text-sm text-gray-400 mt-1">
-                  Sistema de captación para clínicas estéticas
-                </p>
-              </div>
+
+              <span className="text-white font-bold text-lg font-poppins leading-none">
+                NeuroScale <span className="gradient-text">AI</span>
+              </span>
             </Link>
 
-            <p className="text-gray-300 max-w-xl leading-relaxed mb-6">
-              Ayudamos a clínicas estéticas a generar solicitudes de pacientes potenciales
-              mediante anuncios, landing pages y automatización del seguimiento.
+            <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-xs">
+              Automatización con IA para clínicas estéticas que quieren responder antes,
+              organizar leads y mejorar el seguimiento.
             </p>
 
             <div className="flex flex-col gap-3">
               <a
-                href="mailto:lluis.neuroscale.contact@gmail.com"
-                className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors"
-              >
-                <Mail className="w-5 h-5 text-neuro-blue" />
-                lluis.neuroscale.contact@gmail.com
-              </a>
+  href={EMAIL_HREF}
+  target="_blank"
+  rel="noreferrer"
+  className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+>
+  <Mail className="w-4 h-4 text-neuro-blue flex-shrink-0" />
+  lluis.neuroscale.contact@gmail.com
+</a>
 
               <a
                 href="tel:+34603764807"
-                className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors"
+                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
-                <Phone className="w-5 h-5 text-neuro-blue" />
+                <Phone className="w-4 h-4 text-neuro-blue flex-shrink-0" />
                 +34 603 76 48 07
               </a>
 
@@ -45,66 +64,82 @@ const Footer = () => {
                 href="https://wa.me/34603764807"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors"
+                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
-                <MessageCircle className="w-5 h-5 text-neuro-blue" />
-                Hablar por WhatsApp
+                <MessageCircle className="w-4 h-4 text-neuro-blue flex-shrink-0" />
+                Escribir por WhatsApp
               </a>
             </div>
           </div>
 
+          {/* Columna 2 */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Navegación</h3>
-            <div className="flex flex-col gap-3">
-              <a href="#home" className="text-gray-300 hover:text-white transition-colors">
-                Inicio
-              </a>
-              <a href="#services" className="text-gray-300 hover:text-white transition-colors">
-                Sistema
-              </a>
-              <a href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">
-                Cómo funciona
-              </a>
-              <a href="#results" className="text-gray-300 hover:text-white transition-colors">
-                Ejemplos
-              </a>
-              <a href="#faq" className="text-gray-300 hover:text-white transition-colors">
-                FAQ
-              </a>
-            </div>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-5">
+              Navegación
+            </h3>
+
+            <nav className="flex flex-col gap-3">
+              {navLinks.map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+                >
+                  {label}
+                </a>
+              ))}
+
+              <Link
+                to="/contact"
+                className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+              >
+                Solicitar demo
+              </Link>
+            </nav>
           </div>
 
+          {/* Columna 3 */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Siguiente paso</h3>
-            <div className="flex flex-col gap-3">
-              <Link to="/case-studies" className="text-gray-300 hover:text-white transition-colors">
-                Ver casos tipo
-              </Link>
-              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
-                Reservar llamada
-              </Link>
-              <a
-                href="https://wa.me/34603764807"
-                target="_blank"
-                rel="noreferrer"
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                Contacto directo
-              </a>
-            </div>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-5">
+              Siguiente paso
+            </h3>
+
+            <p className="text-gray-400 text-sm leading-relaxed mb-5">
+              Si tu clínica recibe consultas por WhatsApp y quieres que ninguna
+              se pierda por falta de respuesta o seguimiento, podemos revisarlo juntos.
+            </p>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm text-black transition-all duration-300 hover:opacity-90"
+              style={{
+                background: 'linear-gradient(90deg, #00d4ff, #7b2cff)',
+              }}
+            >
+              Solicitar demo
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <p className="text-gray-500 text-sm">
+        {/* Nota de confianza */}
+        <div className="border border-white/10 rounded-xl px-5 py-4 bg-white/[0.02] mb-8">
+          <p className="text-gray-500 text-sm leading-relaxed text-center">
+            NeuroScale no sustituye a recepción ni da diagnósticos médicos.
+            Ayuda a gestionar consultas, leads, avisos, agenda y seguimiento para que
+            el equipo pueda centrarse en la atención importante.
+          </p>
+        </div>
+
+        {/* Copyright */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-6 border-t border-white/10">
+          <p className="text-gray-600 text-xs">
             © 2026 NeuroScale AI. Todos los derechos reservados.
           </p>
 
-          <div className="flex flex-wrap gap-4 text-sm">
-            <span className="text-gray-500">Valencia, España</span>
-            <span className="text-gray-600">•</span>
-            <span className="text-gray-500">Lluis Galbis</span>
-          </div>
+          <p className="text-gray-600 text-xs">
+            Valencia, España · Lluis Galbis
+          </p>
         </div>
       </div>
     </footer>

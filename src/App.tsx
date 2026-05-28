@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Componentes existentes
 import Gracias from './pages/Gracias';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -12,8 +11,7 @@ import Pricing from './components/Pricing';
 import CTA from './components/CTA';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
-
-// Páginas nuevas
+import WhatsAppDemo from './pages/WhatsAppDemo';
 import ServiceDetail from './pages/ServiceDetail';
 import Contact from './pages/Contact';
 import CaseStudies from './pages/CaseStudies';
@@ -42,11 +40,12 @@ function App() {
               </>
             }
           />
-
           <Route path="/service/:serviceId" element={<ServiceDetail />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/case-studies" element={<CaseStudies />} />
-          <Route path="/gracias" element={<Gracias />} />
+          <Route path="/contact"            element={<Contact />} />
+          <Route path="/case-studies"       element={<CaseStudies />} />
+          <Route path="/gracias"            element={<Gracias />} />
+          <Route path="/whatsapp-demo"      element={<WhatsAppDemo />} />
+          <Route path="/demo"               element={<WhatsAppDemo />} />
         </Routes>
       </div>
     </Router>

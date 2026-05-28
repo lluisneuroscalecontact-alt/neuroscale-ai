@@ -1,136 +1,153 @@
+// src/components/Navigation.tsx
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logoIcon from '../assets/vite.svg';
+
+const navLinks = [
+  { label: 'Inicio', href: '#home' },
+  { label: 'Sistema', href: '#services' },
+  { label: 'Cómo funciona', href: '#how-it-works' },
+  { label: 'Resultados', href: '#results' },
+  { label: 'FAQ', href: '#faq' },
+];
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isHome = location.pathname === '/';
-
-  const navLinks = isHome
-    ? [
-        { label: 'Inicio', href: '#home' },
-        { label: 'Sistema', href: '#services' },
-        { label: 'Cómo funciona', href: '#how-it-works' },
-        { label: 'Ejemplos', href: '#results' },
-        { label: 'FAQ', href: '#faq' },
-      ]
-    : [
-        { label: 'Inicio', href: '/' },
-        { label: 'Casos tipo', href: '/case-studies' },
-        { label: 'Contacto', href: '/contact' },
-      ];
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-neuro-black/90 backdrop-blur-lg border-b border-white/10'
-          : 'bg-transparent'
+          : 'bg-neuro-black/70 backdrop-blur-md border-b border-white/5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="w-9 h-9 bg-neuro-blue rounded-lg flex items-center justify-center">
-              <span className="text-neuro-black font-bold text-sm">NS</span>
-            </div>
-            <div>
-              <p className="text-white font-bold text-lg leading-none">NeuroScale AI</p>
-              <p className="text-xs text-gray-400 leading-none mt-1">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+  <img
+    src={logoIcon}
+    alt="NeuroScale AI"
+    className="w-5 h-5 object-contain"
+  />
+</div>
+
+            <div className="leading-none">
+              <span className="block text-white font-bold text-lg font-poppins">
+                NeuroScale <span className="gradient-text">AI</span>
+              </span>
+              <span className="block text-xs text-gray-500 mt-1">
                 Captación para clínicas estéticas
-              </p>
+              </span>
             </div>
           </Link>
 
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) =>
-              link.href.startsWith('#') ? (
+          {/* Desktop */}
+          <div className="hidden md:flex items-center gap-7">
+            {isHome ? (
+              navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                 >
                   {link.label}
                 </a>
-              ) : (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </Link>
-              )
+              ))
+            ) : (
+              <Link
+                to="/"
+                className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+              >
+                Inicio
+              </Link>
             )}
+          </div>
 
+          {/* CTA + burger */}
+          <div className="flex items-center gap-3">
             <Link
               to="/contact"
-              className="px-5 py-2.5 rounded-lg font-semibold text-black transition-all duration-300"
+              className="hidden md:inline-flex items-center px-5 py-2.5 rounded-lg font-semibold text-sm text-black transition-all duration-300 hover:opacity-90"
               style={{
                 background: 'linear-gradient(90deg, #00d4ff, #7b2cff)',
               }}
             >
-              Reservar llamada
+              Solicitar demo
             </Link>
-          </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white"
-            aria-label="Abrir menú"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden text-gray-300 hover:text-white transition-colors"
+              aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+            >
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Menú móvil */}
       {isOpen && (
         <div className="md:hidden bg-neuro-black/95 backdrop-blur-lg border-t border-white/10">
-          <div className="px-4 py-4 space-y-4">
-            {navLinks.map((link) =>
-              link.href.startsWith('#') ? (
+          <div className="px-4 pt-4 pb-6 space-y-1">
+            {isHome ? (
+              navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block text-gray-300 hover:text-white transition-colors"
+                  className="flex items-center px-3 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm"
                 >
                   {link.label}
                 </a>
-              ) : (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-gray-300 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </Link>
-              )
+              ))
+            ) : (
+              <Link
+                to="/"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center px-3 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm"
+              >
+                Inicio
+              </Link>
             )}
 
-            <Link
-              to="/contact"
-              onClick={() => setIsOpen(false)}
-              className="block text-center px-5 py-3 rounded-lg font-semibold text-black"
-              style={{
-                background: 'linear-gradient(90deg, #00d4ff, #7b2cff)',
-              }}
-            >
-              Reservar llamada
-            </Link>
+            <div className="pt-3">
+              <Link
+                to="/contact"
+                onClick={() => setIsOpen(false)}
+                className="flex justify-center items-center w-full px-5 py-3 rounded-lg font-semibold text-sm text-black"
+                style={{
+                  background: 'linear-gradient(90deg, #00d4ff, #7b2cff)',
+                }}
+              >
+                Solicitar demo
+              </Link>
+            </div>
           </div>
         </div>
       )}
